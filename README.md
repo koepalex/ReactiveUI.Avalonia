@@ -288,7 +288,7 @@ Welcome to the `ReactiveUI.Avalonia` guide! This tutorial walks you through sett
 Add the `ReactiveUI.Avalonia` package to your Avalonia application project file.
 
 ```xml
-<PackageReference Include="ReactiveUI.Avalonia" Version="11.3.0" />
+<PackageReference Include="ReactiveUI.Avalonia" Version="12.0.0" />
 ```
 
 #### 2. Initialization (recommended)

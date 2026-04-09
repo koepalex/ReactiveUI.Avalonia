@@ -99,8 +99,29 @@ public sealed class AvaloniaScheduler : LocalScheduler
 
         {
             var composite = new CompositeDisposable(2);
+            var cancellation = new CancellationDisposable();
 
-            composite.Add(DispatcherTimer.RunOnce(() => composite.Add(action(this, state)), dueTime));
+            composite.Add(cancellation);
+
+            Dispatcher.UIThread.Post(
+                                     () =>
+                                     {
+                                         if (cancellation.Token.IsCancellationRequested)
+                                         {
+                                             return;
+                                         }
+
+                                         composite.Add(DispatcherTimer.RunOnce(
+                                             () =>
+                                             {
+                                                 if (!cancellation.Token.IsCancellationRequested)
+                                                 {
+                                                     composite.Add(action(this, state));
+                                                 }
+                                             },
+                                             dueTime));
+                                     },
+                                     DispatcherPriority.Background);
 
             return composite;
         }

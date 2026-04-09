@@ -90,7 +90,7 @@ body:
     id: plugin-version
     attributes:
       label: ReactiveUI.Avalonia Version
-      description: e.g. 11.3.4
+      description: e.g. 12.0.0
     validations:
       required: false
   - type: textarea
